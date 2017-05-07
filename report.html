@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+  <script src="report.js" type="text/javascript"></script>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=ioSTX7saHrsNyTMZgF0n"></script>
+<script type="text/javascript" src="geo.js"></script>
+
+</head>
+
+<body>
+   <nav id = "topNav">
+       <ul>
+         <li><a href="#intro">프로젝트 개요</a></li>
+         <li><a href="#analyze">사용자와 과업 분석</a></li>
+         <li><a href="#test">공공개방데이터 소개 및 테스트</a></li>
+         <li><a href="#stroy">스토리보드</a></li>
+       </ul>
+   </nav>
+
+<div id="main">
+  <h1 style ="text-align:right; color: #4e9ed7">2013726059공병조</h1>
+    <div id="intro">
+      <canvas id="canvas" width="600px" height="50px">
+       이 브라우저는 캔버스를 지원하지 않습니다.
+      </canvas>
+      <hr />
+
+      <div>
+        <h2>가장 근처에 위치한 "무료 wifi" 검색 서비스</h2>
+
+        어떤 사용자와 과업을 대상으로 하는가?
+
+        <ul>
+          <li>
+            낮선 곳에서 당장 노트북을 인터넷에 연결해야만 하는 직장인
+          </li>
+          <li>
+            스마트폰 데이터가 조금 남았지만 지금 당장 보고싶은 방송이 있는 학생
+          </li>
+          <li>
+            기타 큰 데이터 사용이 필요한 과업을 수행하려 하는 사람
+          </li>
+        </ul>
+        어떤 데이터로 어떤 서비스를 제공하고자 하는가
+
+        <ul>
+          <li>
+            전국 무료 와이파이 표준 데이터 활용
+          </li>
+          <li>
+            sk Tmap api 활용
+          </li>
+          <li>
+            현재 위치 근처 무료 wifi 위치를 검색해서 지도에 표시
+          </li>
+          <li>
+            현재 위치에서 wifi위치까지 경로 지도에 표시
+          </li>
+        </ul><br />
+        <div id = "astInfo">
+<br />
+          *서비스의 효율에 대해<br />
+          물론 요즘엔 카페만 들어가도 wifi를 이용할 수 있다.<br />
+          하지만 항상 근처에 카페가 있는 것은 아니다.<br />
+          또한, 사용하는 데이터에 비해 과업을 수행하는 시간이 짧다면,<br />
+          일부러 카페에 돈을 내는 것은 아까울 수 있다.<br />
+<br />
+        </div>
+
+      </div>
+    </div>
+
+
+    <div id="analyze">
+      <canvas id="canvas2" width="600px" height="50px">
+       이 브라우저는 캔버스를 지원하지 않습니다.
+      </canvas>
+      <hr />
+      <div>
+
+        <h2>고등학생 사용자가 주택가에서 무료 wifi연결을 찾는 영상</h2><br />
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/7p5yBLChXmM" frameborder="0" allowfullscreen></iframe>
+        <br />
+        <br />
+        관찰결과 보이는 문제점
+                <ul>
+                  <li> 무료wifi를 찾기 위해서는 wifi 검색창을 켜고 확인을 계속하면서 이동해야만 한다.  </li>
+                  <li> wifi를 찾더라도 연결이 느리거나 불안정해서 끊키는 경우가 잦다. </li>
+                  <li> 무료로 연결 가능한 wifi의 보안성이 검증되지 않아 위험하다.       </li>
+                </ul>
+                <br />
+                <div id = "astInfo">
+        <br />
+                  *무료 wifi가 잡히는 위치<br />
+                  영상에 출연한 사용자는 거주지 근처의 무료 wifi가 잡히는 위치를 알고 있었다.<br />
+                  이것은 평소 사용자가 무료wifi를 필요로 하였으며,<br />
+                  무료wifi가 잡히는 위치를 경험적으로 파악하고 있음을 나타낸다.<br />
+
+        <br />
+                </div>
+          원인 추정
+          <ul>
+            <li> 안전한 무료wifi가 어디에 존재하는지 정확히 알 수 없다. </li>
+          </ul>
+          해결 방안
+          <ul>
+            <li> 무료 wifi의 위치를 제공한다. </li>
+            <li> 제공된 무료 wifi의 위치로 이동할 수 있는 경로를 제공한다. </li>
+            <li> 무료 wifi의 위치를 공유/검증할 수 있도록 한다.(구현계획 없음) </li>
+          </ul>
+          <div id = "astInfo">
+          <br />
+            *추가적인 문제점<br />
+            무료 wifi 위치를 필요로 하는 사용자는 유료 데이터의 사용을 꺼려할 것이다.<br />
+            그러나 이 서비스를 웹으로 구현하게 되면 이 서비스를 이용하는데 데이터가 필요하게 된다.<br />
+            실제 운영한다면 서버측에서 많은 작업을 처리하고 최대한 작은 데이터로 이용할 수 있어야 한다.<br />
+
+          <br />
+          </div>
+      </div>
+
+
+    </div>
+    <div id ="test">
+       <canvas id="canvas3" width="600px" height="50px">
+       이 브라우저는 캔버스를 지원하지 않습니다.
+      </canvas>
+      <hr />
+      <h2>전국 무료 wifi 표준 데이터</h2>
+      <a href="https://www.data.go.kr/dataset/15013116/standard.do">https://www.data.go.kr/dataset/15013116/standard.do</a>
+
+      <textarea id="wifi">************ ERROR !**************로컬에서 크롬으로 구동함!
+        chrome.exe –allow-file-access-from-files << 다음과 같이 옵션을 넣어서 크롬 브라우저를 실행해야 한다.
+       </textarea>
+
+      <script src="findWifi.js"></script>
+      <br />
+      <br />같은 폴더에 저장된 data를 불러와 record태그 안의 값을 불러왔다.
+      <br />
+      <br />
+      <div id = "astInfo">
+      <br />
+      *의문점, 문제점<br/>
+      1. 로컬에서 크롬으로 구동시 cross 에러 발생<br />
+      -해결 : chrome.exe –allow-file-access-from-files 같은 방식으로 실행 필요.<br />
+      2. 한글 xml태그를 파싱할 수 없다.<br />
+      -인코딩으로 해결하지 못함 : 관련 내용 질문 / 조사 예정.<br />
+      3. 실제 활용시에는 검색 기능을 적용해야 하는데, 파싱 후 일일이 검사는 효율이 좋지 않아 보인다.<br />
+      -데이터베이스에 저장하는 편이 더 좋은가?<br />
+      <br />
+      </div>
+      <h2>네이버 지도 Api</h2><br />
+      <a href="https://developers.naver.com/main/">https://developers.naver.com/main/</a>
+
+      <div id="map" style="width:400px;height:400px;"></div>
+
+    <script>
+    var mapOptions = {
+        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        zoom: 10
+    };
+
+    var map = new naver.maps.Map('map', mapOptions);
+    </script>
+    <div id = "astInfo">
+    <br />
+    *문제점<br/>
+    1. 로컬에서 크롬으로 구동시 인증 에러 발생<br />
+    URL을 미리 등록하고 인증키를 받아야 하기 때문에 <br />
+    file:///을 이용하여 HTML로 지도api를 불러오는 것은 불가능하다.(localhost까지는 가능)<br />
+    우선 통신이 되는 것을 증명하기 위해 오류 alert가 뜨도록 놔두었다.<br/>
+    <br />
+    따라서 현재 html에 작성한 스크립트는 임시적으로 네이버api튜토리얼을 그대로 붙혀넣은 것이며,
+  </br/>
+  차후 로컬호스트로 html을 올린 후에 길찾기 기능 테스트를 할 예정이다.<br />
+    <br />
+    </div>
+
+    <h2>geolocation Api</h2><br />
+    <a href="https://developer.mozilla.org/ko/docs/WebAPI/Using_geolocation">https://developer.mozilla.org/ko/docs/WebAPI/Using_geolocation</a>
+
+    <p><button onclick="geoFindMe()">현 위치 확인</button></p>
+    <div id="out"></div>
+
+    <br />사용자의 동의를 얻은 경우, 사용자의 현재 위치정보를 표시해준다.
+    <br />수집한 위치 정보를 지도와 연동하여 길찾기에 사용할 계획이 있다.
+      <br />  <br />  <br />
+
+
+    </div>
+    <div id="story">
+      <canvas id="canvas4" width="600px" height="50px">
+      이 브라우저는 캔버스를 지원하지 않습니다.
+     </canvas>
+     <hr />
+       <h2>이미지 시퀀스 (작업 )</h2><br />
+       <img src="image/imageS.jpg" width="600px" height="100%"/>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+ </body>
+
+
+
+</html>
