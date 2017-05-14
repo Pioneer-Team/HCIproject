@@ -8,7 +8,7 @@ var context;
       draw("웹서비스 설계",canvas.getContext("2d"));
       draw("대화형 프로토타입",canvas2.getContext("2d"));
       draw("사용자 대상 실험",canvas3.getContext("2d"));
-      draw("참고 자료 ",canvas4.getContext("2d"));
+      draw("참고 자료",canvas4.getContext("2d"));
 
     }
 
