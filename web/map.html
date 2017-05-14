@@ -81,22 +81,12 @@
 
 
 
-          
 
-                  var markerList = [];
-                  var menuLayer = $('<div style="position:absolute;z-index:10000;background-color:#fff;border:solid 1px #333;padding:10px;display:none;"></div>');
+              var marker = new naver.maps.Marker({
+                  position:  new naver.maps.LatLng(Cookies.get('latitude'), Cookies.get('longitude')),
+                  map: map
+              });
 
-                  map.getPanes().floatPane.appendChild(menuLayer[0]);
-
-
-                  naver.maps.Event.addListener(map, 'click', function(e) {
-                      var marker = new naver.maps.Marker({
-                          position: e.coord,
-                          map: map
-                      });
-
-                      markerList.push(marker);
-                  });
 
 
 
