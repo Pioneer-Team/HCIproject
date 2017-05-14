@@ -89,6 +89,13 @@ var markers = [];
 
 
 markers.push(marker);
+var marker = new naver.maps.Marker({
+    position:  new naver.maps.LatLng(Cookies.get('latitude')+0.01, Cookies.get('longitude')+0.01),
+    map: map
+});
+
+
+markers.push(marker);
 
 
 
