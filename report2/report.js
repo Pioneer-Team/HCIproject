@@ -5,10 +5,10 @@ var context;
       canvas2 = document.getElementById("canvas2");
 
 
-      draw("프로젝트 개요",canvas.getContext("2d"));
-      draw("사용자와 과업 분석",canvas2.getContext("2d"));
-      draw("공공개방데이터 소개 및 테스트",canvas3.getContext("2d"));
-      draw("스토리보드",canvas4.getContext("2d"));
+      draw("웹서비스 설계",canvas.getContext("2d"));
+      draw("대화형 프로토타입",canvas2.getContext("2d"));
+      draw("사용자 대상 실험",canvas3.getContext("2d"));
+      draw("참고 자료 ",canvas4.getContext("2d"));
 
     }
 

@@ -89,7 +89,7 @@
 
 
 
-              db.transaction(queryDB, errorCB);
+              db.transaction(queryDB, er  rorCB);
 
 
 
@@ -177,6 +177,11 @@ function updateMarkers(map, markers) {
 
     var mapBounds = map.getBounds();
     var marker, position;
+
+    var mark = new naver.maps.Marker({
+                    position: new naver.maps.LatLng(Cookies.get('latitude'), Cookies.get('longitude')),
+                    map: map
+
 
     for (var i = 0; i < markers.length; i++) {
 
