@@ -80,22 +80,21 @@
               var map = new naver.maps.Map('map', mapOptions);
 
 
-var markers = [];
 
-              var marker = new naver.maps.Marker({
+              new naver.maps.Marker({
                   position:  new naver.maps.LatLng(Cookies.get('latitude'), Cookies.get('longitude')),
                   map: map
               });
 
 
-markers.push(marker);
-var marker = new naver.maps.Marker({
-    position:  new naver.maps.LatLng(Cookies.get('latitude')+0.01, Cookies.get('longitude')+0.01),
+
+ new naver.maps.Marker({
+    position:  new naver.maps.LatLng(Cookies.get('latitude')+, Cookies.get('longitude')),
     map: map
 });
 
 
-markers.push(marker);
+
 
 
 
