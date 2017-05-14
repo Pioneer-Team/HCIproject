@@ -68,35 +68,36 @@
 
 
 
-
-             var db = window.openDatabase("resources/db.db", "1.0", "wifi", 9261056);
+/*
+             var db = window.openDatabase("resources/db", "1.0", "data", 2 * 1024 * 1024);
 
              function queryDB(tx) {
-                tx.executeSql('select lat, long from data where 37.44<lat and lat <37.45 and 127.14<long and long <127.15', [], querySuccess, errorCB);
+               tx.executeSql('SELECT lat FROM data WHERE lat<33', [], function (tx, results) {
+                  var len = results.rows.length, i  ;
+                  for (i = 0; i < len; i++) {
+                  alert(results.rows.item(i).text);
+                }
+              },  function errorCB(err) {
+                    alert("Error QL: "+err.code);
+                });
+             }
+
+              function errorCB(err) {
+                  alert("Error processing SQL: "+err.code);
               }
 
-              function querySuccess(tx, results) {
-                var len = results.rows.length;
-                console.log("DEMO table: " + len + " rows found.");
-                for (var i=0; i<len; i++){
-                    console.log("Row = " + i + " ID = " + results.rows.item(i).lat );
-                  }
-    }
-
-    function errorCB(err) {
-        alert("Error processing SQL: "+err.code);
-    }
 
 
 
-
-    db.transaction(queryDB, errorCB);
-
+              db.transaction(queryDB, errorCB);
 
 
 
+*/
                 var marker = new naver.maps.Marker({
                      position: new naver.maps.LatLng(Cookies.get('latitude'), Cookies.get('longitude')),
+                     position: new naver.maps.LatLng(Cookies.get('latitude')+0.01, Cookies.get('longitude')+0.01),
+
                      map: map
                  });
 
