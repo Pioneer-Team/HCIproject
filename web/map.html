@@ -59,14 +59,37 @@
               zoom: 10
               };
               var map = new naver.maps.Map('map', mapOptions);
+              //위도경도 표시
+              var output = document.getElementById("out");
+              output.innerHTML = '<p>위도 : ' + Cookies.get('latitude') + '° <br>경도 : ' + Cookies.get('longitude') + '°</p>';
 
-             //var db = openDatabase("resources/db.db", "1.0", "wifi", 200000);
 
 
-             var marker = new naver.maps.Marker({
-                  position: new naver.maps.LatLng(Cookies.get('latitude'), Cookies.get('longitude')),
-                  map: map
+
+
+
+
+             var db = openDatabase("resources/db.db", "1.0", "wifi", 9000000000);
+             db.transaction(function (tx) {
+
+              tx.executeSql("select lat, long from data where 37.44<lat and lat <37.45 and 127.14<long and long <127.15 ", [ ] ,
+                function ( tx, results) {
+
+                  for ( var i = 0 ; i < results.rows.length ; i++) {
+
+                    output.innerHTML = '<p>위도 : ' + results.rows.item(i).lat+ '° <br>경도 : ' +results.rows.item(i).long + '°</p>';
+                   delay(1000);
+
+                  }
+
               });
+            });
+
+                var marker = new naver.maps.Marker({
+                     position: new naver.maps.LatLng(Cookies.get('latitude'), Cookies.get('longitude')),
+                     map: map
+                 });
+
 
             </script>
           </div>
