@@ -15,7 +15,7 @@
     <link href="css/cover.css" rel="stylesheet">
 
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=ioSTX7saHrsNyTMZgF0n"></script>
-    <script type="text/javascript" src="geo.js"></script>
+    <script type="text/javascript" src="js/geo.js"></script>
     <script src="js/js.cookie.js"></script>
 
   </head>
@@ -69,21 +69,31 @@
 
 
 
-             var db = openDatabase("resources/db.db", "1.0", "wifi", 9000000000);
-             db.transaction(function (tx) {
+             var db = window.openDatabase("resources/db.db", "1.0", "wifi", 9261056);
 
-              tx.executeSql("select lat, long from data where 37.44<lat and lat <37.45 and 127.14<long and long <127.15 ", [ ] ,
-                function ( tx, results) {
+             function queryDB(tx) {
+                tx.executeSql('select lat, long from data where 37.44<lat and lat <37.45 and 127.14<long and long <127.15', [], querySuccess, errorCB);
+              }
 
-                  for ( var i = 0 ; i < results.rows.length ; i++) {
-
-                    output.innerHTML = '<p>위도 : ' + results.rows.item(i).lat+ '° <br>경도 : ' +results.rows.item(i).long + '°</p>';
-                   delay(1000);
-
+              function querySuccess(tx, results) {
+                var len = results.rows.length;
+                console.log("DEMO table: " + len + " rows found.");
+                for (var i=0; i<len; i++){
+                    console.log("Row = " + i + " ID = " + results.rows.item(i).lat );
                   }
+    }
 
-              });
-            });
+    function errorCB(err) {
+        alert("Error processing SQL: "+err.code);
+    }
+
+
+
+
+    db.transaction(queryDB, errorCB);
+
+
+
 
                 var marker = new naver.maps.Marker({
                      position: new naver.maps.LatLng(Cookies.get('latitude'), Cookies.get('longitude')),
