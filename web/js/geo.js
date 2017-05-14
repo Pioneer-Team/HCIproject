@@ -10,19 +10,22 @@ function geoFindMe() {
     var latitude  = position.coords.latitude;
     var longitude = position.coords.longitude;
 
-    output.innerHTML = '<p>위도 : ' + latitude + '° <br>경도 : ' + longitude + '°</p>';
+    Cookies.set('latitude' , latitude );
+    Cookies.set('longitude' , longitude);
 
-    var img = new Image();
-    img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+    location.href='map.html'
 
-    output.appendChild(img);
   };
 
   function error() {
+
     output.innerHTML = "사용자의 위치를 찾을 수 없습니다.";
+
   };
+
 
   output.innerHTML = "<p>Locating…</p>";
 
   navigator.geolocation.getCurrentPosition(success, error);
+
 }
