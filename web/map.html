@@ -14,7 +14,6 @@
     <!-- Custom styles for this template -->
     <link href="css/cover.css" rel="stylesheet">
 
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=ioSTX7saHrsNyTMZgF0n"></script>
     <script type="text/javascript" src="js/geo.js"></script>
     <script src="js/js.cookie.js"></script>
 
@@ -80,27 +79,50 @@
                   var map;
                   function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
-                      center: {lat:Cookies.get('latitude'),lng: Cookies.get('longitude')},
+                      center: {lat : parseFloat(Cookies.get('latitude')),lng : parseFloat((Cookies.get('longitude'))},
                       zoom: 8
                     });
-                  }
-                </script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApWG_xqXc00WCZ3d8PkdBFhFFtU-d87K4&callback=initMap"
-      async defer></script>
 
 
 
 
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+        });
+
+        // Add a marker clusterer to manage the markers.
+            var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+
+            }
+
+
+
+          var locations = [
+            {lat : parseFloat(Cookies.get('latitude')),lng : parseFloat((Cookies.get('longitude'))},
+            {lat : parseFloat(Cookies.get('latitude'))+0.5,lng : parseFloat((Cookies.get('longitude'))+0.5}
+          ]
+
+
+          </script>
+          <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+
+          </script>
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApWG_xqXc00WCZ3d8PkdBFhFFtU-d87K4&callback=initMap" async defer></script>
 
 
           </div>
-
-
-
-
-
-
           <div class="mastfoot">
             <div class="inner">
               <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
