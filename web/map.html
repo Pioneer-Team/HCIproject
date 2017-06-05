@@ -18,6 +18,22 @@
     <script type="text/javascript" src="js/geo.js"></script>
     <script src="js/js.cookie.js"></script>
 
+
+
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyC1rRuEyuayJDyAaTFk0jVDAuQWEgCZJk0",
+    authDomain: "test-ee57f.firebaseapp.com",
+    databaseURL: "https://test-ee57f.firebaseio.com",
+    projectId: "test-ee57f",
+    storageBucket: "test-ee57f.appspot.com",
+    messagingSenderId: "578404735681"
+  };
+  firebase.initializeApp(config);
+</script>
+
   </head>
 
   <body>
@@ -51,7 +67,26 @@
 
 
 
+
+
             <div id="map" class="lead" style="width:100%;height:400px;"></div>
+                <script>
+                //위도경도 표시
+                var output = document.getElementById("out");
+                output.innerHTML = '<p>위도 : ' + Cookies.get('latitude') + '° <br>경도 : ' + Cookies.get('longitude') + '°</p>';
+
+
+
+                  var map;
+                  function initMap() {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                      center: {Cookies.get('latitude'), Cookies.get('longitude')},
+                      zoom: 8
+                    });
+                  }
+                </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApWG_xqXc00WCZ3d8PkdBFhFFtU-d87K4&callback=initMap"
+      async defer></script>
 
 
 
@@ -59,66 +94,6 @@
 
 
 
-
-
-
-
-
-            <script>
-
-
-            //위도경도 표시
-            var output = document.getElementById("out");
-            output.innerHTML = '<p>위도 : ' + Cookies.get('latitude') + '° <br>경도 : ' + Cookies.get('longitude') + '°</p>';
-
-
-
-              var mapOptions = {
-              center: new naver.maps.LatLng(Cookies.get('latitude'), Cookies.get('longitude')),
-              zoom: 10
-              };
-              var map = new naver.maps.Map('map', mapOptions);
-
-
-
-
-              var marker = new naver.maps.Marker({
-                  position:  new naver.maps.LatLng(Cookies.get('latitude'), Cookies.get('longitude')),
-                  map: map
-              });
-
-
-
-
-
-
-
-
-
-/*
-             var db = window.openDatabase("resources/db", "1.0", "data", 2 * 1024 * 1024);
-
-             function queryDB(tx) {
-               tx.executeSql('SELECT lat FROM data WHERE lat<33', [], function (tx, results) {
-                  var len = results.rows.length, i  ;
-                  for (i = 0; i < len; i++) {
-                  alert(results.rows.item(i).text);
-                }
-              },  function errorCB(err) {
-                    alert("Error QL: "+err.code);
-                });
-             }
-
-              function errorCB(err) {
-                  alert("Error processing SQL: "+err.code);
-              }
-
-
-
-
-              db.transaction(queryDB, errorCB);
-*/
-            </script>
           </div>
 
 
