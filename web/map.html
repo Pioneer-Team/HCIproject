@@ -80,7 +80,7 @@
                   var map;
                   function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
-                      center: {Cookies.get('latitude'), Cookies.get('longitude')},
+                      center: {lat:Cookies.get('latitude'),lng: Cookies.get('longitude')},
                       zoom: 8
                     });
                   }
