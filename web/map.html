@@ -38,6 +38,15 @@
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApWG_xqXc00WCZ3d8PkdBFhFFtU-d87K4&callback=initMap" async defer></script>
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+    <!--로딩중 표시 스크립트-->
+    <script type="text/javascript" src="js/cover.js"></script>
 
   </head>
 
@@ -77,10 +86,15 @@
                         alert("쿠키 등록 에러! 이용할 수 없는 모바일 기기, 브라우저입니다!");
 
                     }
+
+                    wrapWindowByMask();
+
+
                     //test in
                     var lat = parseFloat(Cookies.get('latitude'));
                     var long = parseFloat(Cookies.get('longitude'));
-
+                    //var lat = 35.03096;
+                    //var long = 127.9035888;
                     //map
                     var map;
                     function initMap() {
@@ -121,6 +135,7 @@
 
 
                       db.once('value', snap => {
+
                             var jsonData = snap.forEach( childSnap =>{
 
                                var key = childSnap.key;
@@ -130,22 +145,39 @@
 
                                if(childLong>long-0.1 && childLong<long+0.1 )
                                {
+
                                  //output.innerHTML += childLong;
                                   var wifiMarker = new google.maps.Marker ({
-                                    position: {lat : childLat ,lng : childLong}, title: childName }
-                                    icon : "./resources/wifiMarker.png"
-                                  );
+                                    position: {lat : childLat ,lng : childLong},
+                                    icon : "./resources/wifiMarker.png",
+                                    title: childName });
                                   wifiMarker.setMap(map);
 
+                                  //네이버 길찾기
+                                  var naverURL = "http://map.naver.com/index.nhn?slng="+ long +"&slat=" + lat +"&stext="+"내 위치"+"&elng="+ childLong +"&elat="+childLat +"&etext="+childName+"&menu=route&pathType=2";
+
+                                  //다음 길찾기
+                                  var daumURL = "http://map.daum.net/link/to/aa,"+childLat+","+childLong;
+
+
+                                  //구글 길찾
+                                  var googleURL = "https://www.google.co.kr/maps/dir/"+ lat +"," + long +"/"+childLat +","+childLong +"/@"+childLat +","+childLong +"z";
+                                  //정보창 등록
+                                  var hereIam = new google.maps.InfoWindow({
+                                                  content: '<h style = "color:black">'+childName+'</h><br /><button onclick="location.href=\''+naverURL+'\'" style = "color:black">naver길찾기</button><br /><button onclick="location.href=\''+daumURL+'\'" style = "color:black">daum길찾기</button><br /><button onclick="location.href=\''+googleURL+'\'" style = "color:black">google길찾기</button>',
+                                                  maxWidth: 300
+                                  });
+
                                   //누르면 네이버 길찾기로 이동
-                                  google.maps.event.addListener(wifiMarker,'click',function(){
-                                    location.href="http://map.naver.com/index.nhn?slng="+ long +"&slat=" + lat +"&stext="+"내 위치"+"&elng="+ childLong +"&elat="+childLat +"&etext="+childName+"&menu=route&pathType=1";
+                                    google.maps.event.addListener(wifiMarker,'click',function(){
+                                    hereIam.open(map,wifiMarker);
                 			            });
 
 
                                }
 
                              });
+                             closeWindowByMask();
                       });
 
 
@@ -176,11 +208,6 @@
 
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
   </body>
 </html>
