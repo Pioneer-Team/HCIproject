@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>Wifi Search</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/cover.css" rel="stylesheet">
+    <script type="text/javascript" src="js/geo.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/js.cookie.js"></script>
+
+    <script>
+    if( !!window.chrome && !!window.chrome.webstore ){
+
+
+    }else{
+
+
+          alert("크롬 이외의 브라우저에서는 오류가 발생할 수 있습니다.");
+    }
+
+
+    </script>
+  </head>
+
+  <body>
+
+
+
+
+
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+
+              <h3 class="masthead-brand">Wifi Search <small>와이파이 검색 시스템</small></h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li ><a href="main.html">검색</a></li>
+                  <li class="active"><a href="#">도움말</a></li>
+                </ul>
+              </nav>
+
+            </div>
+          </div>
+
+
+          <div class="inner cover">
+            <h1 class="cover-heading">도움말</h1>
+            <p >위치정보 제공 안내문이 표시된다면  <br /> 동의해주십시오.</p>
+            <br />
+            <p class="lead">
+              <a onclick="geoFindMe();" class="btn btn-lg btn-default" >Wifi 검색</a>
+            </p>
+            <br />
+          </div>
+            <div id="out"></div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </body>
+</html>

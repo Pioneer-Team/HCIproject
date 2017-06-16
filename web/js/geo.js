@@ -13,13 +13,13 @@ function geoFindMe() {
     Cookies.set('latitude' , latitude );
     Cookies.set('longitude' , longitude);
 
-    location.href='map.html'
+    location.href='./map.html'
 
   };
 
   function error() {
 
-    output.innerHTML = "사용자의 위치를 찾을 수 없습니다.";
+    output.innerHTML = "사용자의 위치를 찾을 수 없습니다.<br><h2>새로고침 해 주세요.</h2>";
 
   };
 

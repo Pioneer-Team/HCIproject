@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+  <script src="report.js" type="text/javascript"></script>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=ioSTX7saHrsNyTMZgF0n"></script>
+<script type="text/javascript" src="geo.js"></script>
+
+
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyC1rRuEyuayJDyAaTFk0jVDAuQWEgCZJk0",
+    authDomain: "test-ee57f.firebaseapp.com",
+    databaseURL: "https://test-ee57f.firebaseio.com",
+    projectId: "test-ee57f",
+    storageBucket: "test-ee57f.appspot.com",
+    messagingSenderId: "578404735681"
+  };
+  firebase.initializeApp(config);
+</script>
+
+
+<!--Map-->
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApWG_xqXc00WCZ3d8PkdBFhFFtU-d87K4&callback=initMap" async defer></script>
+
+
+
+</head>
+
+<body>
+   <nav id = "topNav">
+       <ul>
+         <li><a href="#intro">프로젝트 개요</a></li>
+         <li><a href="#analyze">사용자와 과업 분석</a></li>
+         <li><a href="#test">공공데이터 테스트</a></li>
+         <li><a href="#proto1">초기 프로토타입 및 평가</a></li>
+         <li><a href="#proto2">최종 프로토타입</a></li>
+         <li><a href="#final">최종 사용성 평가</a></li>
+         <li><a href="#con">결론 및 개선방향</a></li>
+         <li><a href="#ref">참고자료</a></li>
+
+
+       </ul>
+   </nav>
+
+<div id="main">
+  <canvas id="canvas" width="600px" height="50px">
+   이 브라우저는 캔버스를 지원하지 않습니다.
+  </canvas>
+      <div id="intro">
+        <h2 id="title">프로젝트 개요</h2>
+      <hr />
+        <h2>근처에 위치한 '무료 wifi' 검색 시스템</h2>
+        <img src="image/wifi.png" width="100%" height="100%"/>
+
+      <div>
+        무료로 이용할 수 있는 wifi가 주변에 있는지 검색해 주는 시스템<br />
+        <br />
+        대상 사용자 <br />
+
+        <ul>
+       <li>
+         야외에서 스마트폰, 노트북 등의 기기로 고용량의 데이터 전송을 필요로 하는 사람.
+       </li>
+       <li>
+         데이터 사용량이 조금밖에 남지 않아서 wifi를 사용해야 하는 학생.
+       </li>
+       <li>
+         여행 등으로 낮선 곳에 가서 wifi를 이용하고 싶은 사람.
+       </li>
+     </ul>
+
+
+
+     어떤 데이터를 사용하는가?
+
+     <ul>
+       <li>
+         전국 무료 와이파이 표준 데이터
+       </li>
+       <li>
+         GooGle Map API
+       </li>
+       <li>
+         geoLocation (사용자 위치 정보)
+       </li>
+     </ul>
+        서비스의 구체적인 흐름
+        <ul>
+          <li>
+입력 : 사용자의 위치 확인
+          </li>
+          <li>
+처리 : 사용자 위치 기준 일정범위 안에 있는 무료 와이파이 좌표 획득
+          </li>
+          <li>
+출력 : 지도에 모두 표시, 클릭한 경우 길안내 호출
+          </li>
+        </ul>
+        <br />
+
+        <div id = "astInfo">
+          <br />
+          전국 무료 와이파이 표준 데이터에 대해<br /><br />
+          이 데이터는 openAPI가 아닌 표준 데이터로서, XML, CSV 등의 형태로 제공된다.<br />
+          (openAPI가 존재하긴 하지만, 기능이 '순서대로 호출'뿐이라 빈약하다.) <br />
+          <br />
+          따라서 데이터를 DB로 만들어서 사용할 필요가 있었다.<br />
+          하지만 안드로이드와는 달리 JS웹이 로컬DB를 참조하는 것은 불가능했다.<br />
+          때문에 웹에서 사용 가능한 DB 서비스를 구축해야 했고 이 과정에서 수많은 시행착오를 겪었다.<br />
+          <br />
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+
+    <div id="analyze">
+      <h2 id="title">사용자와 과업 분석</h2>
+    <hr />
+        <h2>고등학생 사용자가 주택가에서 무료 wifi연결을 찾는 영상</h2>
+      <div>
+
+
+
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/7p5yBLChXmM" frameborder="0" allowfullscreen></iframe>
+          <br />
+          <div id = "astInfo">
+          <br />
+            영상에 출연한 사용자는 거주지 근처의 무료 wifi가 잡히는 위치를 알고 있었다.<br />
+            이것은 평소 사용자가 무료wifi를 필요로 하였음을 나타낸다.<br />
+          <br />
+          </div>
+          <br />
+          관찰결과 보이는 문제점
+                  <ul>
+                    <li> 무료wifi를 찾기 위해서는 wifi 검색창을 켜고 확인을 계속하면서 이동해야만 한다.  </li>
+                    <li> wifi를 찾더라도 연결이 느리거나 불안정해서 끊키는 경우가 잦다. </li>
+                    <li> 무료로 연결 가능한 wifi의 보안성이 검증되지 않아 위험하다. </li>
+                  </ul>
+
+
+            원인 추정
+            <ul>
+              <li> 안전한 무료wifi가 어디에 존재하는지 정확히 알 수 없다. </li>
+            </ul>
+            해결 방안
+            <ul>
+              <li> 무료 wifi의 위치를 제공한다. </li>
+              <li> 제공된 무료 wifi의 위치로 이동할 수 있는 경로를 제공한다. </li>
+              <li> 무료 wifi의 위치를 공유/검증할 수 있도록 한다.(구현계획 없음) </li>
+            </ul>
+
+              </div>
+  </div>
+
+
+    <div id="test">
+      <h2 id="title">공공데이터 소개 및 테스트</h2>
+      <hr />
+      <div>
+
+<h2>전국 무료 wifi 표준 데이터</h2>
+<br />
+데이터베이스를 활용하기 위해서 구글 파이어베이스 서비스를 활용하였다.<br />
+<img src="image/firebase.png" width="50%" height="100%"/><br />
+파이어베이스는 NoSql기반의 실시간 데이터베이스를 제공해 준다.<br />
+test out DB에서 (35.02096 , 127.9035888)에 가까운 값을 찾아서 출력한다.<br />
+<br />
+
+<div id="DBout"></div>
+<br />
+
+<h2>구글 지도 API</h2>
+앞서 구한 좌표를 이용하여 지도에 마커를 표시한다.
+<div id="map" class="lead" style="width:100%;height:400px;"></div>
+
+<h2>geolocation Api</h2><br />
+    <p><button onclick="geoFindMe()">현 위치 확인</button></p>
+    <div id="out"></div>
+
+    <br />위치정보 제공 동의를 얻어서 사용자의 현재 위치정보를 표시해준다<br />
+
+
+<script>
+
+
+//test in
+var lat = 35.02096;
+var long = 127.9035888;
+
+//map
+var map;
+function initMap() {
+
+ //내 위치
+ var myLocation = new google.maps.LatLng(lat, long);
+
+ //구글맵 등록
+ var map = new google.maps.Map(document.getElementById('map'), {
+    center: myLocation,
+    zoom: 15
+ });
+
+ //마커 등록
+ var myMarker = new google.maps.Marker({
+                      position: myLocation,
+                      map: map,
+  });
+
+  //정보창 등록
+
+  //get html
+  var output = document.getElementById("DBout");
+  //get database
+  var db = firebase.database().ref().orderByChild('latitude').startAt(lat-0.1).endAt(lat+0.1);
+
+
+  db.once('value', snap => {
+        var jsonData = snap.forEach( childSnap =>{
+
+           var key = childSnap.key;
+           var childName = childSnap.child("SSID").val();
+           var childLat = childSnap.child("latitude").val();
+           var childLong = childSnap.child("longitude").val();
+
+           if(childLong>long-0.1 && childLong<long+0.1 )
+           {
+              output.innerHTML += childLong+" ";
+
+              var wifiMarker = new google.maps.Marker ({position: {lat : childLat ,lng : childLong}, title: childName });
+              wifiMarker.setMap(map);
+
+              //누르면 네이버 길찾기로 이동
+              google.maps.event.addListener(wifiMarker,'click',function(){
+
+                //location.href="http://map.daum.net/?map_hybrid=true&target=walk&slng="+ long +"&slat=" + lat+"&elng="+ childLong +"&elat="+childLat;
+                location.href="http://map.naver.com/index.nhn?slng="+ long +"&slat=" + lat +"&stext="+"내 위치"+"&elng="+ childLong +"&elat="+childLat +"&etext="+childName+"&menu=route&pathType=1";
+              });
+
+
+           }
+
+         });
+  });
+
+
+
+}
+
+
+
+</script>
+
+
+      </div>
+    </div>
+
+
+
+
+    <div id ="proto1">
+      <h2 id="title">초기 프로토타입 및 사용성 평가</h2>
+      <hr />
+      <h2>프로토타입 사용 테스트와 함께 정성적 평가 설문조사 진행</h2>
+     <br />
+        구글 설문지를 이용, 설문지 작성과 음성 녹음으로 진행할 계획이었다.
+     <br />
+      직관성과 이용상의 불편함에 대해서 조사할 계획이었다.
+      <br />
+      개발 진행 과정에서 위치정보 수동입력에 대한 이야기가 있었다.(위치정보 사용을 꺼리는 클라이언트를 위해서)
+
+    </div>
+    <div id="story">
+      <canvas id="canvas4" width="600px" height="50px">
+      이 브라우저는 캔버스를 지원하지 않습니다.
+     </canvas>
+     <hr />
+       <h2>참고자료</h2>
+       <br />https://navermaps.github.io/maps.js/docs/index.html
+       <br />지오로케이션 api
+       <br />네이버맵 api
+       <br />sqlite3(db.db)
+       <br />github
+       <br />부트스트랩
+       <br />jquery
+       <br />전국 무료 wifi 테이블
+       <br />
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+ </body>
+
+
+
+</html>

@@ -53,8 +53,8 @@
                 <h3 class="masthead-brand">Wifi Search <small>와이파이 검색 시스템</small></h3>
                 <nav>
                   <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">한국어</a></li>
-                  <li><a onclick="alert("Coming Soon!")">English</a></a></li>
+                  <li class="active"><a href="#">검색</a></li>
+                  <li><a href="help.html">도움말</a></li>
                   </ul>
                 </nav>
             </div>
@@ -72,7 +72,11 @@
 
 
 
+                    if (Cookies.get('latitude') == null){
 
+                        alert("쿠키 등록 에러! 이용할 수 없는 모바일 기기, 브라우저입니다!");
+
+                    }
                     //test in
                     var lat = parseFloat(Cookies.get('latitude'));
                     var long = parseFloat(Cookies.get('longitude'));
@@ -87,7 +91,7 @@
                      //구글맵 등록
                      var map = new google.maps.Map(document.getElementById('map'), {
                         center: myLocation,
-                        zoom: 16
+                        zoom: 12
                      });
 
                      //마커 등록
@@ -127,12 +131,15 @@
                                if(childLong>long-0.1 && childLong<long+0.1 )
                                {
                                  //output.innerHTML += childLong;
-                                  var wifiMarker = new google.maps.Marker ({position: {lat : childLat ,lng : childLong}, title: childName });
+                                  var wifiMarker = new google.maps.Marker ({
+                                    position: {lat : childLat ,lng : childLong}, title: childName }
+                                    icon : "./resources/wifiMarker.png"
+                                  );
                                   wifiMarker.setMap(map);
 
                                   //누르면 네이버 길찾기로 이동
                                   google.maps.event.addListener(wifiMarker,'click',function(){
-                                    location.href="http://map.naver.com/index.nhn?slng="+ long +"&slat=" + lat + "&elng="+ childLong +"&elat=" + childLat + "&menu=route&pathType=1";
+                                    location.href="http://map.naver.com/index.nhn?slng="+ long +"&slat=" + lat +"&stext="+"내 위치"+"&elng="+ childLong +"&elat="+childLat +"&etext="+childName+"&menu=route&pathType=1";
                 			            });
 
 

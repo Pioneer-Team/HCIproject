@@ -18,7 +18,18 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/js.cookie.js"></script>
 
+    <script>
+    if( !!window.chrome && !!window.chrome.webstore ){
 
+
+    }else{
+
+
+          alert("크롬 이외의 브라우저에서는 오류가 발생할 수 있습니다.");
+    }
+
+
+    </script>
   </head>
 
   <body>
@@ -37,8 +48,8 @@
               <h3 class="masthead-brand">Wifi Search <small>와이파이 검색 시스템</small></h3>
               <nav>
                 <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">한국어</a></li>
-                  <li><a onclick="alert("Coming Soon!")">English</a></a></li>
+                  <li class="active"><a href="#">검색</a></li>
+                  <li><a href="help.html">도움말</a></li>
                 </ul>
               </nav>
 
@@ -47,11 +58,13 @@
 
 
           <div class="inner cover">
-            <h1 class="cover-heading">근처의 무료 Wifi를 검색해 드립니다.</h1>
-            <p class="lead">위치정보 제공 안내문이 표시된다면 <br /> 동의해주십시오.</p>
+            <h1 class="cover-heading">근방의   무료 Wifi 검색</h1>
+            <p >위치정보 제공 안내문이 표시된다면  <br /> 동의해주십시오.</p>
+            <br />
             <p class="lead">
               <a onclick="geoFindMe();" class="btn btn-lg btn-default" >Wifi 검색</a>
             </p>
+            <br />
           </div>
             <div id="out"></div>
 
