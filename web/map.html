@@ -172,7 +172,10 @@
                                   var googleURL = "https://www.google.co.kr/maps/dir/"+ lat +"," + long +"/"+childLat +","+childLong +"/@"+childLat +","+childLong +"z";
                                   //정보창 등록
                                   var hereIam = new google.maps.InfoWindow({
-                                                  content: '<h style = "color:black">'+childName+'</h><br /><button onclick="window.open(\''+naverURL+'\')" style = "color:black">naver길찾기</button><br /><button onclick="window.open(\''+daumURL+'\')" style = "color:black">daum길찾기</button><br /><button onclick="window.open(\''+googleURL+'\')" style = "color:black">google길찾기</button>',
+                                                  content: '<h style = "color:black">'+childName+'</h><br /><button onclick="window.open(\''+naverURL+'\')" style = "color:black">naver길찾기</button>',
+
+                                                  //다음과 구글 맵 추가하는 부분 
+                                                  //<br /><button onclick="window.open(\''+daumURL+'\')" style = "color:black">daum길찾기</button><br /><button onclick="window.open(\''+googleURL+'\')" style = "color:black">google길찾기</button>',
                                                   maxWidth: 300
                                   });
 
