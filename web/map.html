@@ -153,8 +153,16 @@
                                     title: childName });
                                   wifiMarker.setMap(map);
 
+                                  var filter = "win16|win32|win64|mac|macintel";
+                                  if ( navigator.platform ) {
+                                    if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
+                                      var naverURL = "http://m.map.naver.com/route.nhn?sx="+ long +"&sy=" + lat +"&sname="+"내 위치"+"&ex="+ childLong +"&ey="+childLat +"&ename="+childName+"&menu=route&pathType=0";
+                                    } else {
+                                      var naverURL = "http://map.naver.com/index.nhn?slng="+ long +"&slat=" + lat +"&stext="+"내 위치"+"&elng="+ childLong +"&elat="+childLat +"&etext="+childName+"&menu=route&pathType=2";
+                                    }
+                                }
+
                                   //네이버 길찾기
-                                  var naverURL = "http://map.naver.com/index.nhn?slng="+ long +"&slat=" + lat +"&stext="+"내 위치"+"&elng="+ childLong +"&elat="+childLat +"&etext="+childName+"&menu=route&pathType=2";
 
                                   //다음 길찾기
                                   var daumURL = "http://map.daum.net/link/to/aa,"+childLat+","+childLong;

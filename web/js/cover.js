@@ -8,7 +8,7 @@ function wrapWindowByMask() {
         var loadingImg = '';
 
         loadingImg += "<div id='loadingImg' style='position:absolute; left:50%; top:40%; display:none; z-index:10000;'>";
-        loadingImg += " <img src='./resources/loading.png'/>";
+        loadingImg += " <img src='./resources/loading.gif'/>";
         loadingImg += "</div>";
 
         //화면에 레이어 추가
