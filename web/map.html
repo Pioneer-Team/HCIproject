@@ -131,7 +131,7 @@
                       //var output = document.getElementById("out");
 
                       //get database
-                      var db = firebase.database().ref().orderByChild('latitude').startAt(lat-0.1).endAt(lat+0.1);
+                      var db = firebase.database().ref().orderByChild('latitude').startAt(lat-0.05).endAt(lat+0.05);
 
 
                       db.once('value', snap => {
@@ -143,7 +143,7 @@
                                var childLat = childSnap.child("latitude").val();
                                var childLong = childSnap.child("longitude").val();
 
-                               if(childLong>long-0.1 && childLong<long+0.1 )
+                               if(childLong>long-0.05 && childLong<long+0.05 )
                                {
 
                                  //output.innerHTML += childLong;
