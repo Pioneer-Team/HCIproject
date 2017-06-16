@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+window.open(<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -173,7 +173,7 @@
                                   var googleURL = "https://www.google.co.kr/maps/dir/"+ lat +"," + long +"/"+childLat +","+childLong +"/@"+childLat +","+childLong +"z";
                                   //정보창 등록
                                   var hereIam = new google.maps.InfoWindow({
-                                                  content: '<h style = "color:black">'+childName+'</h><br /><button onclick="location.href=\''+naverURL+'\'" style = "color:black">naver길찾기</button><br /><button onclick="location.href=\''+daumURL+'\'" style = "color:black">daum길찾기</button><br /><button onclick="location.href=\''+googleURL+'\'" style = "color:black">google길찾기</button>',
+                                                  content: '<h style = "color:black">'+childName+'</h><br /><button onclick="window.open(\''+naverURL+'\')" style = "color:black">naver길찾기</button><br /><button onclick="window.open(\''+daumURL+'\')" style = "color:black">daum길찾기</button><br /><button onclick="window.open(\''+googleURL+'\')" style = "color:black">google길찾기</button>',
                                                   maxWidth: 300
                                   });
 
