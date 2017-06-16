@@ -19,14 +19,21 @@
     <script src="js/js.cookie.js"></script>
 
     <script>
-    if( !!window.chrome && !!window.chrome.webstore ){
+    var isChromium = window.chrome,
+      winNav = window.navigator,
+      vendorName = winNav.vendor,
+      isOpera = winNav.userAgent.indexOf("OPR") > -1,
+      isIEedge = winNav.userAgent.indexOf("Edge") > -1,
+      isIOSChrome = winNav.userAgent.match("CriOS");
 
+  if(isIOSChrome){
+     // is Google Chrome on IOS
+  } else if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
+     // is Google Chrome
+  } else {
+    alert("크롬 이외의 브라우저에서는 오류가 발생할 수 있습니다.");
+  }
 
-    }else{
-
-
-          alert("크롬 이외의 브라우저에서는 오류가 발생할 수 있습니다.");
-    }
 
 
     </script>
